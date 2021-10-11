@@ -17,6 +17,7 @@ const carousel = new SwipeCarousel({
     // slideID: '.item', 
     interval: 1000, 
     // isPlaying: false
+    isForward: false
 });
 // const carousel = new Carousel(1000);
 

@@ -116,6 +116,7 @@ just for appearance; change whatever you want
   background-color: red;
 }
 
+.control--direction > span,
 .control--pause > span {
   opacity: 0;
   position: absolute;
