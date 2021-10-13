@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -14,7 +15,7 @@ these make the slideshow work
 */
 .slides {
   position: relative;
-  height: 150px;
+  height: 100vh;
   padding: 0px;
   margin: 0px;
   list-style-type: none;
@@ -42,10 +43,6 @@ these make the slideshow work
 non-essential styles:
 just for appearance; change whatever you want
 */
-.slides {
-  grid-column: 1/span 2;
-}
-
 .slide {
   font-size: 40px;
   padding: 40px;
@@ -53,6 +50,8 @@ just for appearance; change whatever you want
           box-sizing: border-box;
   background: #333;
   color: #fff;
+  background-position: center;
+  background-size: cover;
 }
 
 .slide:nth-of-type(1) {
@@ -76,27 +75,43 @@ just for appearance; change whatever you want
 }
 
 .carousel {
-  margin: 1em;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1em;
+  position: relative;
 }
 
 .indicators,
 .controls {
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 1em;
+  gap: 5em;
+  width: 100%;
+  height: 100px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 3;
+  -webkit-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+.indicators:hover, .indicators:focus,
+.controls:hover,
+.controls:focus {
+  opacity: 0.8;
 }
 
 .indicator,
 .control {
+  position: relative;
   background-color: #ccc;
   cursor: pointer;
   padding: 1em;
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -110,14 +125,111 @@ just for appearance; change whatever you want
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  background-color: transparent;
 }
-.indicator.active,
-.control.active {
-  background-color: red;
+.indicator--prev,
+.control--prev {
+  position: absolute;
+  left: 0%;
+  height: 100vh;
+  top: -5vh;
+  width: 10vw;
+}
+.indicator--prev:hover, .indicator--prev:focus,
+.control--prev:hover,
+.control--prev:focus {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.9)), to(rgba(0, 0, 0, 0)));
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  text-shadow: 0 0 30px #ffffff;
+}
+.indicator--next,
+.control--next {
+  position: absolute;
+  right: 0%;
+  height: 100vh;
+  top: -5vh;
+  width: 10vw;
+}
+.indicator--next:hover, .indicator--next:focus,
+.control--next:hover,
+.control--next:focus {
+  background: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0.9)), to(rgba(0, 0, 0, 0)));
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  text-shadow: 0 0 30px #ffffff;
+}
+.indicator--pause:hover, .indicator--pause:focus, .indicator--direction:hover, .indicator--direction:focus,
+.control--pause:hover,
+.control--pause:focus,
+.control--direction:hover,
+.control--direction:focus {
+  text-shadow: 0 0 30px #ffffff;
+}
+
+.indicators {
+  bottom: 5vh;
+  opacity: 0.6;
+}
+
+.indicator {
+  width: 100px;
+  height: 15px;
+  border-radius: 16px;
+  border: 5px dotted seagreen;
+}
+.indicator.active {
+  background-color: seagreen;
+  border: 5px solid seagreen;
+}
+.indicator[data-slide-to]::after {
+  content: "";
+  -webkit-transition: 2s;
+  -o-transition: 2s;
+  transition: 2s;
+}
+.indicator:hover[data-slide-to="0"]::after, .indicator:focus[data-slide-to="0"]::after {
+  position: absolute;
+  font-size: 20px;
+  content: "Гора";
+  font-weight: 600;
+}
+.indicator:hover[data-slide-to="1"]::after, .indicator:focus[data-slide-to="1"]::after {
+  position: absolute;
+  font-size: 20px;
+  content: "Роща";
+  font-weight: 600;
+}
+.indicator:hover[data-slide-to="2"]::after, .indicator:focus[data-slide-to="2"]::after {
+  position: absolute;
+  font-size: 20px;
+  content: "Пляж";
+  font-weight: 600;
+}
+.indicator:hover[data-slide-to="3"]::after, .indicator:focus[data-slide-to="3"]::after {
+  position: absolute;
+  font-size: 20px;
+  content: "Прибой";
+  font-weight: 600;
+}
+.indicator:hover[data-slide-to="4"]::after, .indicator:focus[data-slide-to="4"]::after {
+  position: absolute;
+  font-size: 20px;
+  content: "Закат";
+  font-weight: 600;
+}
+
+.controls {
+  top: 5vh;
+  opacity: 0.3;
 }
 
 .control--direction > span,
 .control--pause > span {
   opacity: 0;
   position: absolute;
+}
+
+.fas {
+  font-size: 100px;
 }
